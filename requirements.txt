@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 plotly
-scikit-learn
-sentence-transformers
+python-pptx
+kaleido
 openpyxl
-pip install python-pptx kaleido
