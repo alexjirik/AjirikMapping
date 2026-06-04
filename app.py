@@ -8,6 +8,10 @@ import json
 import uuid
 import re
 
+# --- NEW IMPORTS FOR POWERPOINT ---
+from pptx import Presentation
+from pptx.util import Inches
+
 # --- CONFIGURATION & STYLING ---
 st.set_page_config(layout="wide", page_title="Custom CA Studio")
 
@@ -37,9 +41,29 @@ if 'map_rot' not in st.session_state: st.session_state.map_rot = 0
 if 'show_base_cols' not in st.session_state: st.session_state.show_base_cols = True
 if 'show_base_rows' not in st.session_state: st.session_state.show_base_rows = True
 
+# --- PPTX GENERATION FUNCTION ---
+def generate_pptx(fig):
+    """Converts the Plotly figure to a PNG and embeds it in a new PowerPoint slide."""
+    prs = Presentation()
+    # Layout 6 is typically a blank slide
+    blank_slide_layout = prs.slide_layouts[6] 
+    slide = prs.slides.add_slide(blank_slide_layout)
+    
+    # Export the plotly figure as a high-res image byte stream
+    img_bytes = fig.to_image(format="png", width=1280, height=720, scale=2)
+    img_stream = io.BytesIO(img_bytes)
+    
+    # Add image to slide (Centered: 10 inches wide standard presentation)
+    slide.shapes.add_picture(img_stream, Inches(0.5), Inches(0.5), width=Inches(9))
+    
+    # Save to a new byte stream
+    pptx_stream = io.BytesIO()
+    prs.save(pptx_stream)
+    pptx_stream.seek(0)
+    return pptx_stream
+
 # --- PROJECT SAVE/LOAD SERIALIZATION ---
 def serialize_project():
-    """Converts the entire session state into a robust JSON string using record format."""
     project_data = {
         "version": "1.3",
         "processed": st.session_state.processed,
@@ -64,7 +88,6 @@ def serialize_project():
     return json.dumps(project_data, indent=2)
 
 def deserialize_project(json_str):
-    """Restores the session state gracefully, patching older versions dynamically."""
     try:
         data = json.loads(json_str)
         st.session_state.processed = data.get("processed", False)
@@ -75,14 +98,11 @@ def deserialize_project(json_str):
         st.session_state.show_base_cols = data.get("show_base_cols", True)
         st.session_state.show_base_rows = data.get("show_base_rows", True)
        
-        # Helper to rebuild DataFrames safely regardless of version format
         def load_df(df_data):
             if not df_data:
                 return pd.DataFrame()
-            # If the user uploads an older V1.2 "split" format, adapt it dynamically
             if isinstance(df_data, dict) and "columns" in df_data and "data" in df_data:
                 return pd.DataFrame(**df_data)
-            # If it is the new, clean V1.3 "records" list format
             return pd.DataFrame(df_data)
            
         st.session_state.df_b_master = load_df(data.get("df_b_master"))
@@ -104,16 +124,12 @@ def deserialize_project(json_str):
 
 # --- ENTERPRISE HEADER DETECTOR & SANITIZER ---
 def clean_header_formatting(s):
-    """Strips trailing carriage returns, hyphens, or underscores commonly exported by survey platforms."""
     if pd.isna(s):
          return ""
-    # Split by newline (like "Simply\n-----------") and take the first clean part
     s_str = str(s).split('\n')[0].strip()
-    # Strip trailing punctuation artifacts
     return s_str.rstrip('-_= ')
 
 def detect_header_row(file_buffer, file_is_csv, expected_labels=None):
-    """Heuristically scans the first 15 rows of a dirty spreadsheet to find where the table headers actually start."""
     file_buffer.seek(0)
     try:
         if file_is_csv:
@@ -146,7 +162,6 @@ def detect_header_row(file_buffer, file_is_csv, expected_labels=None):
                 continue
             non_empty += 1
            
-            # Remove formatting punctuation to verify if numeric
             cell_clean = str(cell).strip().replace(',', '').replace('%', '').replace('$', '')
             try:
                 float(cell_clean)
@@ -159,7 +174,6 @@ def detect_header_row(file_buffer, file_is_csv, expected_labels=None):
                 elif any(k in cell_norm for k in ['total', 'brand', 'attribute', 'statement', 'demographic', 'segment', 'universe', 'respondent']):
                     matches += 2
 
-        # SCORING ALGORITHM: Header rows have high string counts, near-zero numbers, and many non-empty columns
         score = matches + strings_count - (2.0 * numbers_count) + (0.1 * non_empty)
         if score > max_score and non_empty > 2:
             max_score = score
@@ -169,7 +183,6 @@ def detect_header_row(file_buffer, file_is_csv, expected_labels=None):
 
 # --- CORE MATH FUNCTIONS ---
 def normalize_str(s_series):
-    # Aggressively strips ALL punctuation and ALL whitespace so column mapping never fails
     return s_series.astype(str).str.lower().str.replace(r'[^\w\s]', '', regex=True).str.replace(r'\s+', '', regex=True).str.strip()
 
 def rotate_coords(df, angle_deg):
@@ -187,13 +200,11 @@ def process_ca(uploaded_file):
         uploaded_file.seek(0)
         file_is_csv = uploaded_file.name.endswith('.csv')
        
-        # Detect the true header row
         header_row_idx = detect_header_row(uploaded_file, file_is_csv)
        
         uploaded_file.seek(0)
         df = pd.read_csv(uploaded_file, header=header_row_idx) if file_is_csv else pd.read_excel(uploaded_file, header=header_row_idx)
        
-        # Sanitize formatting artifacts from the headers
         df.columns = [clean_header_formatting(c) for c in df.columns]
         df.iloc[:, 0] = df.iloc[:, 0].apply(clean_header_formatting)
        
@@ -204,14 +215,12 @@ def process_ca(uploaded_file):
             df[col] = pd.to_numeric(df[col].astype(str).str.replace(r'[,$%]', '', regex=True), errors='coerce')
         df = df.fillna(0)
        
-        # AGGRESSIVE SCRUBBER: Destroy completely blank rows/cols and ghost "Unnamed/NaN" tags
         df = df.dropna(how='all', axis=0).dropna(how='all', axis=1)
         clean_cols = [c for c in df.columns if "unnamed" not in str(c).lower() and str(c).strip() != ""]
         df = df[clean_cols]
         clean_rows = [r for r in df.index if "unnamed" not in str(r).lower() and str(r).lower() != "nan" and str(r).strip() != ""]
         df = df.loc[clean_rows]
        
-        # Purge any "Total" or "Universe" columns and rows completely
         u_idx_row = df.index.astype(str).str.strip().str.contains(r"^(?:Study Universe|Total Population|Grand Total|Total Market|Total)$", case=False, regex=True)
         u_idx_col = df.columns.astype(str).str.strip().str.contains(r"^(?:Study Universe|Total Population|Grand Total|Total Market|Total)$", case=False, regex=True)
        
@@ -234,7 +243,6 @@ def process_ca(uploaded_file):
         st.session_state.max_dim = max_dim
         st.session_state.s_vals = s[:max_dim]
        
-        # Safe Slicing to prevent Array Broadcast Shape Errors
         U = U[:, :max_dim]
         s_sliced = s[:max_dim]
         Vh = Vh[:max_dim, :]
@@ -261,20 +269,17 @@ def process_passive(file, name, mode):
         file.seek(0)
         file_is_csv = file.name.endswith('.csv')
        
-        # Match against active base coordinates for 100% precision header matching
         expected_labels = []
         if not st.session_state.df_b_master.empty:
             expected_labels.extend(st.session_state.df_b_master['Label'].tolist())
         if not st.session_state.df_a_master.empty:
             expected_labels.extend(st.session_state.df_a_master['Label'].tolist())
            
-        # Detect the true header row
         header_row_idx = detect_header_row(file, file_is_csv, expected_labels)
        
         file.seek(0)
         df = pd.read_csv(file, header=header_row_idx) if file_is_csv else pd.read_excel(file, header=header_row_idx)
        
-        # Sanitize formatting artifacts from the headers
         df.columns = [clean_header_formatting(c) for c in df.columns]
         df.iloc[:, 0] = df.iloc[:, 0].apply(clean_header_formatting)
        
@@ -284,14 +289,12 @@ def process_passive(file, name, mode):
             df[col] = pd.to_numeric(df[col].astype(str).str.replace(r'[,$%]', '', regex=True), errors='coerce')
         df = df.fillna(0)
        
-        # AGGRESSIVE SCRUBBER: Destroy completely blank rows/cols and ghost "Unnamed/NaN" tags
         df = df.dropna(how='all', axis=0).dropna(how='all', axis=1)
         clean_cols = [c for c in df.columns if "unnamed" not in str(c).lower() and str(c).strip() != ""]
         df = df[clean_cols]
         clean_rows = [r for r in df.index if "unnamed" not in str(r).lower() and str(r).lower() != "nan" and str(r).strip() != ""]
         df = df.loc[clean_rows]
        
-        # Purge "Total" rows/cols from passive layers so they don't plot as ghost dots!
         u_idx_row = df.index.astype(str).str.strip().str.contains(r"^(?:Study Universe|Total Population|Grand Total|Total Market|Total)$", case=False, regex=True)
         u_idx_col = df.columns.astype(str).str.strip().str.contains(r"^(?:Study Universe|Total Population|Grand Total|Total Market|Total)$", case=False, regex=True)
         df = df.loc[~u_idx_row, ~u_idx_col].copy()
@@ -314,9 +317,8 @@ def process_passive(file, name, mode):
                 for orig, norm in zip(df.columns, p_cols_norm):
                     if norm in col_mapper: p_aligned.iloc[:, col_mapper[norm]] = df[orig].values
                
-                # Robust bulletproof matrix multiplication
                 row_sums = p_aligned.sum(axis=1).values
-                row_sums = np.where(row_sums == 0, 1, row_sums) # Prevent divide by zero
+                row_sums = np.where(row_sums == 0, 1, row_sums)
                 base_coords = st.session_state.df_b_master[[f'Dim{i+1}' for i in range(max_d)]].values
                
                 proj = (p_aligned.values / row_sums[:, None]) @ base_coords / s
@@ -328,7 +330,6 @@ def process_passive(file, name, mode):
                 for orig, norm in zip(df.index, p_idx_norm):
                     if norm in row_mapper: p_aligned.iloc[row_mapper[norm], :] = df.loc[orig].values
                
-                # Robust bulletproof matrix multiplication
                 col_sums = p_aligned.sum(axis=0).values
                 col_sums = np.where(col_sums == 0, 1, col_sums)
                 base_coords = st.session_state.df_a_master[[f'Dim{i+1}' for i in range(max_d)]].values
@@ -340,7 +341,6 @@ def process_passive(file, name, mode):
             res = pd.DataFrame(proj, columns=[f'Dim{k+1}' for k in range(max_d)])
             res['Label'] = df.index if mode == "Rows (Match by Columns)" else df.columns
            
-            # Return stable structural layer object
             return {
                 "id": str(uuid.uuid4())[:8],
                 "name": name,
@@ -361,11 +361,10 @@ st.markdown("Upload any raw crosstab grid (Columns = Brands/Groups, Rows = Attri
 with st.sidebar:
     st.markdown('<div class="sidebar-header">💾 Save / Load Studio Project</div>', unsafe_allow_html=True)
    
-    # Exporter
     if st.session_state.processed:
         proj_json = serialize_project()
         st.download_button(
-            label="💾 Download Project File (.castudio)",
+            label="📥 Download Project File (.castudio)",
             data=proj_json,
             file_name="presentation_studio_workspace.castudio",
             mime="application/json",
@@ -374,7 +373,6 @@ with st.sidebar:
     else:
         st.caption("Perform an analysis or load an existing project to begin.")
        
-    # Importer
     load_file = st.file_uploader("📂 Load Project File", type=['castudio', 'json'], help="Upload a previously saved .castudio project to restore your map instantly!")
     if load_file is not None:
         if st.button("🔄 Import Workspace", use_container_width=True):
@@ -383,36 +381,33 @@ with st.sidebar:
                 st.success("Project restored!")
                 st.rerun()
 
-    st.markdown('<div class="sidebar-header">📂 1. Core Map Data</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-header">📊 1. Core Map Data</div>', unsafe_allow_html=True)
     core_file = st.file_uploader("Upload Base Crosstab", type=['csv', 'xlsx'])
     if core_file:
-        if st.button("🚀 Run Analysis", use_container_width=True):
+        if st.button("⚙️ Run Analysis", use_container_width=True):
             st.session_state.passive_layers = []
             st.session_state.hidden_items = []
             process_ca(core_file)
 
     if st.session_state.processed:
-        st.markdown('<div class="sidebar-header">👁️ 2. Map Layer Manager</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-header">🗺️ 2. Map Layer Manager</div>', unsafe_allow_html=True)
        
-        # Unified Base Toggles
-        st.session_state.show_base_cols = st.checkbox("👁️ Base Columns (Brands)", value=st.session_state.show_base_cols)
-        st.session_state.show_base_rows = st.checkbox("👁️ Base Rows (Attributes)", value=st.session_state.show_base_rows)
+        st.session_state.show_base_cols = st.checkbox("👤 Base Columns (Brands)", value=st.session_state.show_base_cols)
+        st.session_state.show_base_rows = st.checkbox("🏷️ Base Rows (Attributes)", value=st.session_state.show_base_rows)
        
-        # Stable Passive Layer Interface
         if st.session_state.passive_layers:
             st.markdown("**Overlay Layers:**")
             for i, layer in enumerate(st.session_state.passive_layers):
                 col_tog, col_del = st.columns([4, 1])
                 with col_tog:
-                    # Using permanent ID so list deletions never cause sliding toggle glitch
-                    is_vis = st.checkbox(f"👁️ {layer['name']}", value=layer['visible'], key=f"vis_layer_{layer['id']}")
+                    is_vis = st.checkbox(f"{layer['name']}", value=layer['visible'], key=f"vis_layer_{layer['id']}")
                     st.session_state.passive_layers[i]['visible'] = is_vis
                 with col_del:
                     if st.button("🗑️", key=f"del_l_{layer['id']}", help="Remove Layer"):
                         st.session_state.passive_layers.pop(i)
                         st.rerun()
 
-        st.markdown('<div class="sidebar-header">⚙️ 3. Map Dimensions</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-header">📐 3. Map Dimensions</div>', unsafe_allow_html=True)
         col_x, col_y = st.columns(2)
         with col_x: x_ax = st.selectbox("X-Axis", range(1, st.session_state.max_dim + 1), index=0)
         with col_y: y_ax = st.selectbox("Y-Axis", range(1, st.session_state.max_dim + 1), index=1 if st.session_state.max_dim > 1 else 0)
@@ -430,8 +425,6 @@ with st.sidebar:
                 st.session_state.passive_layers.append(res_dict)
                 st.success(f"Added {p_name}!")
                 st.rerun()
-            else:
-                st.error("Could not align layer. Check your column/row names.")
 
 # --- MAIN CANVAS ---
 if st.session_state.processed:
@@ -459,14 +452,16 @@ if st.session_state.processed:
         with t_col4:
             wrap_len = st.slider("Max Chars Per Line", 15, 100, 35)
             map_height = st.slider("Canvas Height", 500, 1200, 750, step=50)
-            passive_boost = st.slider("Passive Dot Spread", 1.0, 10.0, 1.5, step=0.5, help="Demographics naturally clump in the center. Use this to violently stretch them outward to make them readable!")
+            passive_boost = st.slider("Passive Dot Spread", 1.0, 10.0, 1.5, step=0.5, help="Demographics naturally clump in the center. Stretch them outward!")
 
-    st.button("🔄 Unhide All Labels", on_click=lambda: st.session_state.update({'hidden_items': []}))
+    # Top Toolbar Buttons
+    action_col1, action_col2, action_col3 = st.columns([2, 3, 5])
+    with action_col1:
+        st.button("👁️ Unhide All Labels", on_click=lambda: st.session_state.update({'hidden_items': []}), use_container_width=True)
 
     df_p_list = []
     for l in st.session_state.passive_layers:
         p_df = l['df'].copy()
-        # Apply the passive spread boost multiplier!
         p_df['x'] = p_df[f'Dim{x_ax}'] * passive_boost
         p_df['y'] = p_df[f'Dim{y_ax}'] * passive_boost
         p_df['Visible'] = l['visible']
@@ -538,7 +533,6 @@ if st.session_state.processed:
                 visible=True if is_visible else False
             ))
 
-    # Sidebar unified toggles determine rendering behavior
     if st.session_state.show_base_cols:
         add_layer_to_fig(df_b, col_color, col_shape, col_size, "Columns")
            
@@ -553,7 +547,6 @@ if st.session_state.processed:
         n = p_df['LayerName'].iloc[0]
         add_layer_to_fig(p_df, c, s, col_size - 2, n)
 
-    # Calculate Axis Bounds
     all_x = []
     all_y = []
     if st.session_state.show_base_cols:
@@ -585,7 +578,27 @@ if st.session_state.processed:
         'toImageButtonOptions': {'format': 'png', 'filename': "CA_Export", 'height': 720, 'width': 1280, 'scale': 3}
     }
 
-    st.info("💡 **Instructions:** You can now zoom and pan around the map! Click and drag any text label to un-clutter the map. Click directly on a dot to hide it entirely. Hover over the top right to download a high-res 16:9 PNG for PowerPoint. (Tip: Use the 'Reset Axes' house icon before exporting so your images stack perfectly in PPT!)")
+    # PPTX Generation Button Interface (Must execute AFTER fig is created)
+    with action_col2:
+        if st.button("📊 Prepare PowerPoint Slide", use_container_width=True):
+            with st.spinner("Generating slide image..."):
+                try:
+                    # Execute the function and store the result in session state
+                    st.session_state.pptx_bytes = generate_pptx(fig).getvalue()
+                except Exception as e:
+                    st.error(f"Failed! Make sure 'python-pptx' and 'kaleido' are installed via pip. Error: {e}")
+                    
+    with action_col3:
+        if 'pptx_bytes' in st.session_state:
+            st.download_button(
+                label="📥 Download Ready (.pptx)",
+                data=st.session_state.pptx_bytes,
+                file_name="Correspondence_Analysis_Map.pptx",
+                mime="application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                use_container_width=True
+            )
+
+    st.info("💡 **Instructions:** You can zoom and pan around the map! Click and drag any text label to un-clutter the map. Click directly on a dot to hide it entirely. **When finished, click 'Prepare PowerPoint Slide' above!**")
 
     map_event = st.plotly_chart(
         fig, use_container_width=True, config=exp_config,
@@ -603,4 +616,4 @@ if st.session_state.processed:
             if changed: st.rerun()
 
 else:
-    st.info("👈 Upload a Core Data crosstab or restore a `.castudio` project in the sidebar to begin building your map.")
+    st.info("📂 Upload a Core Data crosstab or restore a `.castudio` project in the sidebar to begin building your map.")
