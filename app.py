@@ -115,10 +115,10 @@ def render_checkbox_search(key_prefix, label, options, default_selection=None):
         
         if matches:
             st.caption(f"Found {len(matches)} matches:")
-            grid_cols = st.columns(3)
+            grid_cols = st.columns(2) # Changed to 2 columns for wider text display
             for i, match in enumerate(matches[:60]):
-                with grid_cols[i % 3]:
-                    display_text = f"➕ {match[:45]}..." if len(match) > 45 else f"➕ {match}"
+                with grid_cols[i % 2]:
+                    display_text = f"➕ {match}" # Display the full string without truncation
                     st.button(
                         display_text,
                         key=f"{key_prefix}_btn_{match}",
@@ -544,9 +544,9 @@ if uploaded_file:
                 with target_col:
                     role_label = "(Threshold Pool)" if stmt in threshold_statements else "(Mandatory Rule)"
                     is_scale = (("Psycho]" in stmt) and ("Core Value" not in stmt)) or ("Kids Attitudes]" in stmt)
-                    if is_scale: statement_logic[stmt] = st.selectbox(f"Match requirement for: {stmt[:35]}... {role_label}", options=SCALE_OPTIONS[2:], index=0, key=f"logic_{stmt}")
+                    if is_scale: statement_logic[stmt] = st.selectbox(f"Match requirement for: {stmt} {role_label}", options=SCALE_OPTIONS[2:], index=0, key=f"logic_{stmt}")
                     else:
-                        st.info(f"✔️ **{stmt[:45]}...** (Auto-Matched as YES/NO)")
+                        st.info(f"✔️ **{stmt}** (Auto-Matched as YES/NO)")
                         statement_logic[stmt] = "Exact Match / YES (Binary)"
             
             st.markdown("---")
@@ -554,7 +554,11 @@ if uploaded_file:
             with col_thresh:
                 if threshold_statements:
                     max_statements = len(threshold_statements)
-                    threshold = st.slider("Must meet requirements for at least how many of the Threshold Statements?", min_value=1, max_value=max_statements, value=max(1, int(max_statements * 0.7)))
+                    if max_statements > 1:
+                        threshold = st.slider("Must meet requirements for at least how many of the Threshold Statements?", min_value=1, max_value=max_statements, value=max(1, int(max_statements * 0.7)))
+                    else:
+                        threshold = 1
+                        st.info("✔️ 1 Threshold Statement selected (Must meet 1).")
                 else:
                     threshold = 0
                     st.caption("No Threshold pool selected. Evaluating Mandatory statements only.")
@@ -700,7 +704,7 @@ if uploaded_file:
                     for i, v in enumerate(scale_vars_in_base):
                         t_col = b_logic1 if i % 2 == 0 else b_logic2
                         with t_col:
-                            base_logic_dict[v] = st.selectbox(f"Match requirement for: {v[:40]}...", options=SCALE_OPTIONS[2:], index=0, key=f"base_logic_{v}")
+                            base_logic_dict[v] = st.selectbox(f"Match requirement for: {v}", options=SCALE_OPTIONS[2:], index=0, key=f"base_logic_{v}")
                 
                 # 3. Ask if they want to intersect (AND) or combine (OR) these base rules
                 base_combine_logic = st.radio("How should we combine these Base filters?", ["OR (Must meet ANY)", "AND (Must meet ALL)"], horizontal=True)
@@ -795,7 +799,7 @@ if uploaded_file:
                     for i, v in enumerate(scale_vars_in_ct):
                         t_col = col_rl1 if i % 2 == 0 else col_rl2
                         with t_col:
-                            ct_logic_dict[v] = st.selectbox(f"{v[:40]}...", options=SCALE_OPTIONS[2:], index=0, key=f"ct_logic_all_{v}")
+                            ct_logic_dict[v] = st.selectbox(f"{v}", options=SCALE_OPTIONS[2:], index=0, key=f"ct_logic_all_{v}")
 
             # CALCULATE BUTTON LOGIC
             if st.button("🚀 Calculate & Generate Crosstab", type="primary"):
