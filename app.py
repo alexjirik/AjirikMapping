@@ -118,7 +118,7 @@ def render_checkbox_search(key_prefix, label, options, default_selection=None):
             grid_cols = st.columns(2) # Changed to 2 columns for wider text display
             for i, match in enumerate(matches[:60]):
                 with grid_cols[i % 2]:
-                    display_text = f"➕ {match}" # Display the full string without truncation
+                    display_text = f"➕ {match}" # Removed text truncation limits globally
                     st.button(
                         display_text,
                         key=f"{key_prefix}_btn_{match}",
@@ -790,7 +790,6 @@ if uploaded_file:
         if ct_rows and (ct_cols_for_ui or st.session_state['created_definitions']):
             st.markdown("---")
             
-            # MOVED OUTSIDE OF CALCULATE BUTTON LOGIC
             scale_vars_in_ct = [v for v in set(ct_rows + ct_cols_for_ui) if (("Psycho]" in v) and ("Core Value" not in v)) or ("Kids Attitudes]" in v)]
             ct_logic_dict = {}
             if scale_vars_in_ct:
