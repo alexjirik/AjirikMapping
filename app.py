@@ -14,32 +14,140 @@ st.title("🎯 Universal Market Segment & Landscape Builder")
 st.markdown("Upload your raw survey data. **Use the dropdown boxes to search by Question Number (e.g., type 'Q19' or 'D5')** to instantly find what you need.")
 
 # =====================================================================
-# THE MEGA-CODEBOOK DICTIONARIES (COMPLETE & ACCURATE TO SPEC)
+# THE MEGA-CODEBOOK DICTIONARIES (EXPANDED TO FULL VERBATIMS)
 # =====================================================================
 CATEGORIES = {"OJxBuyersQuota": "Orange Juice", "ADExBuyersQuota": "Lemonade & Ades", "OtherJuicexBuyersQuota": "Other Fruit Juices/Blends", "LightxBuyersQuota": "Zero/Light/Lower Sugar"}
 P3M_CATS = {1: "Soda/Pop/Cola", 2: "Tea", 3: "Coffee", 4: "Kombucha", 5: "Juice/Lemonade", 6: "Milk", 7: "Flavored water/seltzer", 8: "Sports drinks", 9: "Energy drinks", 10: "Nectars"}
 BRANDS = {1: "Simply", 2: "Minute Maid", 3: "Fruitopia", 4: "Five Alive", 5: "Honest Kids", 6: "Allen's", 7: "Compliments", 8: "Del Monte", 9: "Dole", 10: "Fruité", 11: "Great Value", 12: "Kiju", 13: "Kool-Aid", 14: "Natural One", 15: "Oasis", 16: "Ocean Spray", 17: "President's Choice", 18: "Rougemont", 19: "Rubicon Exotic", 20: "Sunny Delight", 21: "SunRype", 22: "Tradition", 23: "Tropicana", 24: "Irresistible", 25: "Western Family", 26: "None/Other"}
 CHANNELS = {1: "Grocery store", 2: "Ethnic Grocery", 3: "Mass retailer", 4: "Club store", 5: "Convenience store", 6: "Drug store", 7: "Gas station", 8: "Coffee shop", 9: "Deli", 10: "Restaurant", 11: "Other"}
 SIZES = {1: "Large carton", 2: "Single carton", 3: "Large plastic jug", 4: "Can", 5: "Single plastic bottle", 6: "Fountain cup", 7: "Other"}
-WHY_CHOOSE = {1: "Price/Value", 2: "Coupon/Incentive", 3: "Brand Loyalty", 4: "Trial/New", 5: "HH Request", 6: "Availability", 7: "Health Benefit", 8: "Convenience", 9: "Other"}
-WHO_DRINKS = {1: "Child <6", 2: "Child 6-12", 3: "Child 13-17", 4: "Other adult", 5: "Myself"}
-OTHER_ADULT_AGES = {1: "18-24", 2: "25-34", 3: "35-49", 4: "50-64", 5: "65+"}
-WHEN_HOW = {1: "With breakfast", 2: "Morning snack", 3: "Morning alone", 4: "With lunch", 5: "Afternoon snack", 6: "Afternoon alone", 7: "With dinner", 8: "Evening snack", 9: "Evening alone", 10: "Special occasion/treat", 11: "During/after exercise", 12: "Parties/social"}
-FREQUENCY = {1: "Multiple times/day", 2: "Once a day", 3: "3-5 times/week", 4: "1-2 times/week", 5: "2-3 times/month", 6: "Rarely/infrequently"}
-REASONS = {1: "Hydration & Refreshment", 2: "Energy & Focus", 3: "Health & Wellness", 4: "Indulgence & Craving", 5: "Routine & Habit", 6: "Social & Relaxation", 7: "Family Needs"}
-BRAND_ATTITUDES = {1: "Upset if went away", 2: "For someone like me", 3: "Fond memories", 4: "Brand I trust", 5: "Cares about people like me", 6: "Modern brand", 7: "Proud to purchase", 8: "Price feels fair", 9: "Tastes superior", 10: "Know exactly what to expect", 11: "Positive relationship", 12: "Always find it", 13: "Proudly Canadian", 14: "None of these"}
-KIDS_ATTITUDES = {1: "Healthy option for children", 2: "Feel guilty giving to children", 3: "Kids handle sugar better", 4: "Sugar is inescapable for kids", 5: "Give kids what they want", 6: "Gets kids to consume fruits/veg", 7: "Provides necessary vitamins"}
-BEV_ATTITUDES_1 = {1: "Pay premium for quality", 2: "Simple ingredients", 3: "Cool packaging", 4: "Highly convenient", 5: "Daily routine", 6: "Always next to me", 7: "Sweet drink over sweet food", 8: "Smaller portion of real juice"}
-BEV_ATTITUDES_2 = {1: "Bold/tart kick", 2: "Functional health benefits", 3: "Change depending on season", 4: "Don't worry about sugar", 5: "Strictly avoid added sugars", 6: "Less worried if health benefits", 7: "Actively limit due to sugar", 8: "Only zero-sugar"}
+
+WHY_CHOOSE = {1: "Good price or overall value", 2: "I had a coupon or promotional incentive", 3: "Strong loyalty to this brand", 4: "I wanted to try something new", 5: "Someone in my household requested it", 6: "It was easily available where I shop", 7: "It provides a specific health benefit", 8: "The packaging or size is convenient", 9: "Other reason"}
+WHO_DRINKS = {1: "My child (under 6 years old)", 2: "My child (6-12 years old)", 3: "My child (13-17 years old)", 4: "Another adult in the household", 5: "Myself"}
+OTHER_ADULT_AGES = {1: "18-24 years old", 2: "25-34 years old", 3: "35-49 years old", 4: "50-64 years old", 5: "65+ years old"}
+WHEN_HOW = {1: "Consumed with breakfast", 2: "Consumed as a morning snack", 3: "Consumed by myself in the morning", 4: "Consumed with lunch", 5: "Consumed as an afternoon snack", 6: "Consumed by myself in the afternoon", 7: "Consumed with dinner", 8: "Consumed as an evening snack", 9: "Consumed by myself in the evening", 10: "Consumed for a special occasion or as a treat", 11: "Consumed during or after exercise", 12: "Consumed at parties or social gatherings"}
+FREQUENCY = {1: "Multiple times per day", 2: "Once a day", 3: "3 to 5 times per week", 4: "1 to 2 times per week", 5: "2 to 3 times per month", 6: "Rarely or infrequently"}
+REASONS = {1: "For general hydration and refreshment", 2: "For energy and mental focus", 3: "For specific health and wellness benefits", 4: "As an indulgence or to satisfy a craving", 5: "It is part of my daily routine and habit", 6: "For social occasions or relaxation", 7: "To fulfill the needs of my family"}
+
+BRAND_ATTITUDES = {
+    1: "I would be genuinely upset if this brand went away.", 
+    2: "This is a brand for someone like me.", 
+    3: "I have fond memories associated with this brand.", 
+    4: "This is a brand I deeply trust.", 
+    5: "This brand cares about people like me.", 
+    6: "This is a modern, up-to-date brand.", 
+    7: "I am proud to purchase this brand.", 
+    8: "The price of this brand feels fair for what you get.", 
+    9: "This brand tastes superior to other options.", 
+    10: "I know exactly what to expect when I buy this brand.", 
+    11: "I have a positive relationship with this brand.", 
+    12: "I can always find this brand when I look for it.", 
+    13: "This brand is proudly Canadian.", 
+    14: "None of these statements apply."
+}
+
+KIDS_ATTITUDES = {
+    1: "This is a healthy beverage option for my children.", 
+    2: "I feel guilty giving this to my children.", 
+    3: "Kids can handle sugar better than adults can.", 
+    4: "Sugar is inescapable when it comes to kids' drinks.", 
+    5: "I prefer to just give my kids what they want to drink.", 
+    6: "This product helps get my kids to consume more fruits and vegetables.", 
+    7: "This provides necessary vitamins for my children."
+}
+
+BEV_ATTITUDES_1 = {
+    1: "I am willing to pay a premium price for a high-quality or specialty beverage.", 
+    2: "I prefer beverages made with simple, easily recognizable ingredients.", 
+    3: "I am drawn to buying drinks that have cool packaging or look aesthetically pleasing.", 
+    4: "I prioritize beverages that are highly convenient and easy to grab on the go.", 
+    5: "Beverages are an important part of my daily routine.", 
+    6: "I almost always have a beverage sitting next to me while I work or relax at home.", 
+    7: "When I crave something sweet, I often prefer to drink a flavorful zero calorie beverage rather than eat something sweet.", 
+    8: "I would rather drink a smaller portion of real juice than a larger portion of a diet or artificially sweetened drink."
+}
+
+BEV_ATTITUDES_2 = {
+    1: "I actively seek out drinks with a bold, tart, or sour kick (like a strong lemonade) over things that are purely sweet.", 
+    2: "I actively seek out beverages that provide functional health benefits.", 
+    3: "My beverage choices change completely depending on the season.", 
+    4: "I don't worry about sugar content in juice.", 
+    5: "Natural sugar from fruit is fine, but I strictly avoid added sugars in juice.", 
+    6: "As long as the juice provides real health benefits, I am less worried about the sugar content.", 
+    7: "I actively limit how much juice is consumed or water it down because of the sugar content.", 
+    8: "I only look for zero-sugar alternatives for juice."
+}
 
 MRI_VALUES = {1: "Wealth", 2: "Adventure", 3: "Ambition", 4: "Thrift", 5: "Social responsibility", 6: "Excitement", 7: "Simplicity", 8: "Curiosity", 9: "Creativity", 10: "Enjoying life", 11: "Working hard", 12: "Duty"}
-LOYALTY_APPROACH = {1: "Loyal to one brand", 2: "Choose between familiar brands", 3: "Always exploring new brands", 4: "Choose least expensive", 5: "None of the above"}
-CONSUMPTION_CHANGE = {1: "Drinking more than a year ago", 2: "Drinking less (changed this year)", 3: "Drinking less (gradual change)", 4: "Stayed about the same"}
 
-RECENT_PURCHASE = {1: "Within last week", 2: "1-2 weeks ago", 3: "2-4 weeks ago", 4: "1-2 months ago", 5: "More than 2 months ago"}
-ADULT_PURCHASE_DRIVERS = {1: "Taste", 2: "Added nutritional benefits", 3: "Brand", 4: "Low sugar content", 5: "No sugar added", 6: "Total Price", 7: "Price per mL/ounce", 8: "Added functional benefits", 9: "Largest-size container", 10: "Smallest-size container", 11: "Medium-size container", 12: "Easy to pour", 13: "Low calorie content", 14: "Level of pulp / Flavor", 15: "Natural ingredients", 16: "No high sugar warning", 17: "Not from Concentrate", 18: "Other"}
-KIDS_PURCHASE_DRIVERS = {1: "Taste", 2: "Added nutritional benefits", 3: "Brand", 4: "Low sugar content", 5: "No sugar added", 6: "Total Price", 7: "Price per mL/ounce", 8: "Added functional benefits", 9: "Largest-size container", 10: "Smallest-size container", 11: "Medium-size container", 12: "Easy to pour", 13: "Low calorie content", 14: "Flavor", 15: "Has fun packaging", 16: "Does not have characters", 17: "No high sugar warning", 18: "Not from Concentrate", 19: "Natural ingredients", 20: "Other"}
-LAST_TIME_INFLUENCE = {1: "Child asked for it", 2: "Healthy / nutritious option", 3: "Indulgent choice / treat", 4: "Other (Q10d only)", 5: "Haven't purchased for child in 3M"}
+LOYALTY_APPROACH = {
+    1: "I am loyal to one specific brand.", 
+    2: "I usually choose between a few familiar brands.", 
+    3: "I am always exploring new brands.", 
+    4: "I choose the least expensive option available.", 
+    5: "None of the above."
+}
+
+CONSUMPTION_CHANGE = {
+    1: "I am drinking more of this than I was a year ago.", 
+    2: "I am drinking less of this (I intentionally made a change this year).", 
+    3: "I am drinking less of this (It was a gradual change over time).", 
+    4: "My consumption has stayed about the same."
+}
+
+RECENT_PURCHASE = {1: "Within the last week", 2: "1 to 2 weeks ago", 3: "2 to 4 weeks ago", 4: "1 to 2 months ago", 5: "More than 2 months ago"}
+
+ADULT_PURCHASE_DRIVERS = {
+    1: "The taste or flavor profile", 
+    2: "Added nutritional benefits (like vitamins or minerals)", 
+    3: "My trust or preference for the brand", 
+    4: "It has a low sugar content", 
+    5: "It has no sugar added", 
+    6: "The total price of the product", 
+    7: "The price per mL or ounce", 
+    8: "Added functional benefits (like energy or immunity)", 
+    9: "It is the largest-size container available", 
+    10: "It is the smallest-size container available", 
+    11: "It is a medium-size container", 
+    12: "The container is easy to pour", 
+    13: "It has a low calorie content", 
+    14: "The specific level of pulp or flavor intensity", 
+    15: "It is made with natural ingredients", 
+    16: "It does not have a high sugar warning label", 
+    17: "It is Not from Concentrate", 
+    18: "Other reason"
+}
+
+KIDS_PURCHASE_DRIVERS = {
+    1: "The taste or flavor profile", 
+    2: "Added nutritional benefits (like vitamins or minerals)", 
+    3: "My trust or preference for the brand", 
+    4: "It has a low sugar content", 
+    5: "It has no sugar added", 
+    6: "The total price of the product", 
+    7: "The price per mL or ounce", 
+    8: "Added functional benefits (like energy or immunity)", 
+    9: "It is the largest-size container available", 
+    10: "It is the smallest-size container available", 
+    11: "It is a medium-size container", 
+    12: "The container is easy to pour", 
+    13: "It has a low calorie content", 
+    14: "The specific flavor my child prefers", 
+    15: "It has fun packaging for kids", 
+    16: "It does not have cartoon characters on it", 
+    17: "It does not have a high sugar warning label", 
+    18: "It is Not from Concentrate", 
+    19: "It is made with natural ingredients", 
+    20: "Other reason"
+}
+
+LAST_TIME_INFLUENCE = {
+    1: "My child explicitly asked for it.", 
+    2: "I chose it because it is a healthy or nutritious option.", 
+    3: "I chose it as an indulgent choice or treat.", 
+    4: "Other reason.", 
+    5: "I haven't purchased this for my child in the past 3 months."
+}
 
 PSYCHOGRAPHICS = {
     "Q19_r1": "I thrive at big parties and social occasions", "Q19_r2": "I think of myself as an intellectual", "Q19_r3": "Spending time with my family is my top priority", "Q19_r4": "I am interested in finding out how I can help the environment", "Q19_r5": "I am an optimist", "Q19_r6": "I seek out variety in my everyday life", "Q19_r7": "I make sure I take time for myself each day", "Q19_r8": "I like to learn about foreign cultures", "Q19_r9": "I’m perfectly happy with my standard of living", "Q20_r1": "I like to change brands often for the sake of variety and novelty", "Q20_r2": "I buy based on quality, not price", "Q20_r3": "Price is more important to me than brand names", "Q20_r4": "Generic or store brand products are as effective as brand-name products", "Q20_r5": "I enjoy wandering the store looking for new, interesting products", "Q20_r6": "I tend to make impulse purchases", "Q20_r7": "My children have significant impact on the brands I choose", "Q20_r8": "I buy brands that reflect my style", "Q20_r9": "I am influenced by what's hot and what's not", "Q21_r1": "I prefer foods cooked with bold flavors", "Q21_r2": "Nutritional value is the most important factor when I'm choosing which foods to eat", "Q21_r3": "I eat the foods I like regardless of calories", "Q21_r4": "I believe in a healthy lifestyle instead of traditional dieting", "Q21_r5": "Food is a comfort to me", "Q21_r6": "I indulge my cravings for foods I enjoy", "Q21_r7": "I am loyal to my food brands and stick with them", "Q21_r8": "Fast food is junk food", "Q21_r9": "I prefer to eat foods without artificial ingredients", "Q21_r10": "I try to eat a healthy breakfast every day", "Q22_r1": "I am generally more fit and active than other people my age", "Q22_r2": "I frequently look for new ways to change up my exercise routine", "Q22_r3": "I regularly look for ways to get a better night’s sleep", "Q22_r4": "Because of my busy lifestyle, I don’t take care of myself as well as I should", "Q22_r5": "The health claims/benefits on a product package often influence my decision to buy it", "Q22_r6": "Taking care of your mental health is a critical part of your overall wellness", "Q22_r7": "I always do what my doctor tells me to do", "Q22_r8": "I consider my diet to be very healthy"
@@ -118,7 +226,7 @@ def render_checkbox_search(key_prefix, label, options, default_selection=None):
             grid_cols = st.columns(2) # Changed to 2 columns for wider text display
             for i, match in enumerate(matches[:60]):
                 with grid_cols[i % 2]:
-                    display_text = f"➕ {match}" # Removed text truncation limits globally
+                    display_text = f"➕ {match}" # Display the full string without truncation
                     st.button(
                         display_text,
                         key=f"{key_prefix}_btn_{match}",
