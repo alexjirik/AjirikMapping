@@ -14,20 +14,75 @@ st.title("🎯 Universal Market Segment & Landscape Builder")
 st.markdown("Upload your raw survey data. **Use the dropdown boxes to search by Question Number (e.g., type 'Q19' or 'D5')** to instantly find what you need.")
 
 # =====================================================================
-# THE MEGA-CODEBOOK DICTIONARIES (EXPANDED TO FULL VERBATIMS)
+# THE MEGA-CODEBOOK DICTIONARIES (FULLY SPELLED OUT & VERBATIM)
 # =====================================================================
-CATEGORIES = {"OJxBuyersQuota": "Orange Juice", "ADExBuyersQuota": "Lemonade & Ades", "OtherJuicexBuyersQuota": "Other Fruit Juices/Blends", "LightxBuyersQuota": "Zero/Light/Lower Sugar"}
-P3M_CATS = {1: "Soda/Pop/Cola", 2: "Tea", 3: "Coffee", 4: "Kombucha", 5: "Juice/Lemonade", 6: "Milk", 7: "Flavored water/seltzer", 8: "Sports drinks", 9: "Energy drinks", 10: "Nectars"}
-BRANDS = {1: "Simply", 2: "Minute Maid", 3: "Fruitopia", 4: "Five Alive", 5: "Honest Kids", 6: "Allen's", 7: "Compliments", 8: "Del Monte", 9: "Dole", 10: "Fruité", 11: "Great Value", 12: "Kiju", 13: "Kool-Aid", 14: "Natural One", 15: "Oasis", 16: "Ocean Spray", 17: "President's Choice", 18: "Rougemont", 19: "Rubicon Exotic", 20: "Sunny Delight", 21: "SunRype", 22: "Tradition", 23: "Tropicana", 24: "Irresistible", 25: "Western Family", 26: "None/Other"}
-CHANNELS = {1: "Grocery store", 2: "Ethnic Grocery", 3: "Mass retailer", 4: "Club store", 5: "Convenience store", 6: "Drug store", 7: "Gas station", 8: "Coffee shop", 9: "Deli", 10: "Restaurant", 11: "Other"}
-SIZES = {1: "Large carton", 2: "Single carton", 3: "Large plastic jug", 4: "Can", 5: "Single plastic bottle", 6: "Fountain cup", 7: "Other"}
+CATEGORIES = {
+    "OJxBuyersQuota": "Orange Juice Purchaser", 
+    "ADExBuyersQuota": "Lemonade and Ades Purchaser", 
+    "OtherJuicexBuyersQuota": "Other Fruit Juices and Blends Purchaser", 
+    "LightxBuyersQuota": "Zero, Light, or Lower Sugar Beverages Purchaser"
+}
 
-WHY_CHOOSE = {1: "Good price or overall value", 2: "I had a coupon or promotional incentive", 3: "Strong loyalty to this brand", 4: "I wanted to try something new", 5: "Someone in my household requested it", 6: "It was easily available where I shop", 7: "It provides a specific health benefit", 8: "The packaging or size is convenient", 9: "Other reason"}
-WHO_DRINKS = {1: "My child (under 6 years old)", 2: "My child (6-12 years old)", 3: "My child (13-17 years old)", 4: "Another adult in the household", 5: "Myself"}
-OTHER_ADULT_AGES = {1: "18-24 years old", 2: "25-34 years old", 3: "35-49 years old", 4: "50-64 years old", 5: "65+ years old"}
-WHEN_HOW = {1: "Consumed with breakfast", 2: "Consumed as a morning snack", 3: "Consumed by myself in the morning", 4: "Consumed with lunch", 5: "Consumed as an afternoon snack", 6: "Consumed by myself in the afternoon", 7: "Consumed with dinner", 8: "Consumed as an evening snack", 9: "Consumed by myself in the evening", 10: "Consumed for a special occasion or as a treat", 11: "Consumed during or after exercise", 12: "Consumed at parties or social gatherings"}
-FREQUENCY = {1: "Multiple times per day", 2: "Once a day", 3: "3 to 5 times per week", 4: "1 to 2 times per week", 5: "2 to 3 times per month", 6: "Rarely or infrequently"}
-REASONS = {1: "For general hydration and refreshment", 2: "For energy and mental focus", 3: "For specific health and wellness benefits", 4: "As an indulgence or to satisfy a craving", 5: "It is part of my daily routine and habit", 6: "For social occasions or relaxation", 7: "To fulfill the needs of my family"}
+P3M_CATS = {
+    1: "Soda, Pop, or Cola", 2: "Tea", 3: "Coffee", 4: "Kombucha", 5: "Juice or Lemonade", 
+    6: "Milk", 7: "Flavored Water or Seltzer", 8: "Sports Drinks", 9: "Energy Drinks", 10: "Nectars"
+}
+
+BRANDS = {
+    1: "Simply", 2: "Minute Maid", 3: "Fruitopia", 4: "Five Alive", 5: "Honest Kids", 6: "Allen's", 
+    7: "Compliments", 8: "Del Monte", 9: "Dole", 10: "Fruité", 11: "Great Value", 12: "Kiju", 
+    13: "Kool-Aid", 14: "Natural One", 15: "Oasis", 16: "Ocean Spray", 17: "President's Choice", 
+    18: "Rougemont", 19: "Rubicon Exotic", 20: "Sunny Delight", 21: "SunRype", 22: "Tradition", 
+    23: "Tropicana", 24: "Irresistible", 25: "Western Family", 26: "None or Other Brand"
+}
+
+CHANNELS = {
+    1: "Traditional Grocery Store", 2: "Ethnic Grocery Store", 3: "Mass Retailer (e.g., Walmart)", 
+    4: "Club Store (e.g., Costco)", 5: "Convenience Store", 6: "Drug Store or Pharmacy", 
+    7: "Gas Station", 8: "Coffee Shop or Cafe", 9: "Deli or Sandwich Shop", 10: "Restaurant", 11: "Other Location"
+}
+
+SIZES = {
+    1: "Large Carton", 2: "Single-Serve Carton", 3: "Large Plastic Jug", 4: "Can", 
+    5: "Single-Serve Plastic Bottle", 6: "Fountain Cup", 7: "Other Package Size"
+}
+
+WHY_CHOOSE = {
+    1: "It was a good price or overall value", 2: "I had a coupon or promotional incentive", 
+    3: "I have strong loyalty to this brand", 4: "I wanted to try something new", 
+    5: "Someone in my household requested it", 6: "It was easily available where I shop", 
+    7: "It provides a specific health benefit", 8: "The packaging or size is highly convenient", 9: "Other reason"
+}
+
+WHO_DRINKS = {
+    1: "My child (under 6 years old)", 2: "My child (6 to 12 years old)", 
+    3: "My child (13 to 17 years old)", 4: "Another adult in the household", 5: "Myself"
+}
+
+OTHER_ADULT_AGES = {
+    1: "18 to 24 years old", 2: "25 to 34 years old", 3: "35 to 49 years old", 
+    4: "50 to 64 years old", 5: "65 years old or older"
+}
+
+WHEN_HOW = {
+    1: "Consumed with breakfast", 2: "Consumed as a morning snack", 3: "Consumed by myself in the morning", 
+    4: "Consumed with lunch", 5: "Consumed as an afternoon snack", 6: "Consumed by myself in the afternoon", 
+    7: "Consumed with dinner", 8: "Consumed as an evening snack", 9: "Consumed by myself in the evening", 
+    10: "Consumed for a special occasion or as a treat", 11: "Consumed during or after exercise", 
+    12: "Consumed at parties or social gatherings"
+}
+
+FREQUENCY = {
+    1: "Multiple times per day", 2: "Once a day", 3: "3 to 5 times per week", 
+    4: "1 to 2 times per week", 5: "2 to 3 times per month", 6: "Rarely or infrequently"
+}
+
+REASONS = {
+    1: "For general hydration and refreshment", 2: "For energy and mental focus", 
+    3: "For specific health and wellness benefits", 4: "As an indulgence or to satisfy a craving", 
+    5: "It is part of my daily routine and habit", 6: "For social occasions or relaxation", 
+    7: "To fulfill the needs of my family"
+}
 
 BRAND_ATTITUDES = {
     1: "I would be genuinely upset if this brand went away.", 
@@ -78,7 +133,11 @@ BEV_ATTITUDES_2 = {
     8: "I only look for zero-sugar alternatives for juice."
 }
 
-MRI_VALUES = {1: "Wealth", 2: "Adventure", 3: "Ambition", 4: "Thrift", 5: "Social responsibility", 6: "Excitement", 7: "Simplicity", 8: "Curiosity", 9: "Creativity", 10: "Enjoying life", 11: "Working hard", 12: "Duty"}
+MRI_VALUES = {
+    1: "Wealth", 2: "Adventure", 3: "Ambition", 4: "Thrift", 5: "Social Responsibility", 
+    6: "Excitement", 7: "Simplicity", 8: "Curiosity", 9: "Creativity", 10: "Enjoying Life", 
+    11: "Working Hard", 12: "Duty"
+}
 
 LOYALTY_APPROACH = {
     1: "I am loyal to one specific brand.", 
@@ -95,7 +154,10 @@ CONSUMPTION_CHANGE = {
     4: "My consumption has stayed about the same."
 }
 
-RECENT_PURCHASE = {1: "Within the last week", 2: "1 to 2 weeks ago", 3: "2 to 4 weeks ago", 4: "1 to 2 months ago", 5: "More than 2 months ago"}
+RECENT_PURCHASE = {
+    1: "Within the last week", 2: "1 to 2 weeks ago", 3: "2 to 4 weeks ago", 
+    4: "1 to 2 months ago", 5: "More than 2 months ago"
+}
 
 ADULT_PURCHASE_DRIVERS = {
     1: "The taste or flavor profile", 
@@ -150,39 +212,77 @@ LAST_TIME_INFLUENCE = {
 }
 
 PSYCHOGRAPHICS = {
-    "Q19_r1": "I thrive at big parties and social occasions", "Q19_r2": "I think of myself as an intellectual", "Q19_r3": "Spending time with my family is my top priority", "Q19_r4": "I am interested in finding out how I can help the environment", "Q19_r5": "I am an optimist", "Q19_r6": "I seek out variety in my everyday life", "Q19_r7": "I make sure I take time for myself each day", "Q19_r8": "I like to learn about foreign cultures", "Q19_r9": "I’m perfectly happy with my standard of living", "Q20_r1": "I like to change brands often for the sake of variety and novelty", "Q20_r2": "I buy based on quality, not price", "Q20_r3": "Price is more important to me than brand names", "Q20_r4": "Generic or store brand products are as effective as brand-name products", "Q20_r5": "I enjoy wandering the store looking for new, interesting products", "Q20_r6": "I tend to make impulse purchases", "Q20_r7": "My children have significant impact on the brands I choose", "Q20_r8": "I buy brands that reflect my style", "Q20_r9": "I am influenced by what's hot and what's not", "Q21_r1": "I prefer foods cooked with bold flavors", "Q21_r2": "Nutritional value is the most important factor when I'm choosing which foods to eat", "Q21_r3": "I eat the foods I like regardless of calories", "Q21_r4": "I believe in a healthy lifestyle instead of traditional dieting", "Q21_r5": "Food is a comfort to me", "Q21_r6": "I indulge my cravings for foods I enjoy", "Q21_r7": "I am loyal to my food brands and stick with them", "Q21_r8": "Fast food is junk food", "Q21_r9": "I prefer to eat foods without artificial ingredients", "Q21_r10": "I try to eat a healthy breakfast every day", "Q22_r1": "I am generally more fit and active than other people my age", "Q22_r2": "I frequently look for new ways to change up my exercise routine", "Q22_r3": "I regularly look for ways to get a better night’s sleep", "Q22_r4": "Because of my busy lifestyle, I don’t take care of myself as well as I should", "Q22_r5": "The health claims/benefits on a product package often influence my decision to buy it", "Q22_r6": "Taking care of your mental health is a critical part of your overall wellness", "Q22_r7": "I always do what my doctor tells me to do", "Q22_r8": "I consider my diet to be very healthy"
+    "Q19_r1": "I thrive at big parties and social occasions", 
+    "Q19_r2": "I think of myself as an intellectual", 
+    "Q19_r3": "Spending time with my family is my top priority", 
+    "Q19_r4": "I am interested in finding out how I can help the environment", 
+    "Q19_r5": "I am an optimist", 
+    "Q19_r6": "I seek out variety in my everyday life", 
+    "Q19_r7": "I make sure I take time for myself each day", 
+    "Q19_r8": "I like to learn about foreign cultures", 
+    "Q19_r9": "I’m perfectly happy with my standard of living", 
+    "Q20_r1": "I like to change brands often for the sake of variety and novelty", 
+    "Q20_r2": "I buy based on quality, not price", 
+    "Q20_r3": "Price is more important to me than brand names", 
+    "Q20_r4": "Generic or store brand products are as effective as brand-name products", 
+    "Q20_r5": "I enjoy wandering the store looking for new, interesting products", 
+    "Q20_r6": "I tend to make impulse purchases", 
+    "Q20_r7": "My children have significant impact on the brands I choose", 
+    "Q20_r8": "I buy brands that reflect my style", 
+    "Q20_r9": "I am influenced by what's hot and what's not", 
+    "Q21_r1": "I prefer foods cooked with bold flavors", 
+    "Q21_r2": "Nutritional value is the most important factor when I'm choosing which foods to eat", 
+    "Q21_r3": "I eat the foods I like regardless of calories", 
+    "Q21_r4": "I believe in a healthy lifestyle instead of traditional dieting", 
+    "Q21_r5": "Food is a comfort to me", 
+    "Q21_r6": "I indulge my cravings for foods I enjoy", 
+    "Q21_r7": "I am loyal to my food brands and stick with them", 
+    "Q21_r8": "Fast food is junk food", 
+    "Q21_r9": "I prefer to eat foods without artificial ingredients", 
+    "Q21_r10": "I try to eat a healthy breakfast every day", 
+    "Q22_r1": "I am generally more fit and active than other people my age", 
+    "Q22_r2": "I frequently look for new ways to change up my exercise routine", 
+    "Q22_r3": "I regularly look for ways to get a better night’s sleep", 
+    "Q22_r4": "Because of my busy lifestyle, I don’t take care of myself as well as I should", 
+    "Q22_r5": "The health claims/benefits on a product package often influence my decision to buy it", 
+    "Q22_r6": "Taking care of your mental health is a critical part of your overall wellness", 
+    "Q22_r7": "I always do what my doctor tells me to do", 
+    "Q22_r8": "I consider my diet to be very healthy"
 }
 
-ETHNICITIES = {1: "Asian", 2: "Arab", 3: "Black", 4: "Caucasian/White", 5: "Latin American", 6: "Jewish", 7: "Indigenous Peoples", 8: "Other", 9: "Do not wish to reply"}
+ETHNICITIES = {
+    1: "Asian", 2: "Arab", 3: "Black", 4: "Caucasian or White", 
+    5: "Latin American", 6: "Jewish", 7: "Indigenous Peoples", 8: "Other Ethnicity", 9: "Do not wish to reply"
+}
 
 DEMO_MAP = {
     "LangQuota": {1: "Language: French", 2: "Language: English", "EN": "Language: English", "FR": "Language: French", "English": "Language: English", "French": "Language: French", "1.0": "Language: French", "2.0": "Language: English"},
-    "S2": {1: "Province: AB", 2: "Province: BC", 3: "Province: MB", 4: "Province: NB", 5: "Province: NL", 7: "Province: NS", 8: "Province: NU", 9: "Province: ON", 10: "Province: PEI", 11: "Province: QC", 12: "Province: SK", 13: "Province: YT"},
-    "S3": {2: "Age: 18-24", 3: "Age: 25-34", 4: "Age: 35-44", 5: "Age: 45-54", 6: "Age: 55-65"},
-    "S4": {1: "Kids in HH: Yes", 2: "Kids in HH: No"},
+    "S2": {1: "Province: Alberta", 2: "Province: British Columbia", 3: "Province: Manitoba", 4: "Province: New Brunswick", 5: "Province: Newfoundland and Labrador", 7: "Province: Nova Scotia", 8: "Province: Nunavut", 9: "Province: Ontario", 10: "Province: Prince Edward Island", 11: "Province: Quebec", 12: "Province: Saskatchewan", 13: "Province: Yukon"},
+    "S3": {2: "Age: 18 to 24 years old", 3: "Age: 25 to 34 years old", 4: "Age: 35 to 44 years old", 5: "Age: 45 to 54 years old", 6: "Age: 55 to 65 years old"},
+    "S4": {1: "Children in Household: Yes", 2: "Children in Household: No"},
     "D1": {1: "Gender: Female", 2: "Gender: Male", 3: "Gender: Non-Binary"},
-    "D3": {1: "Marital: Single", 2: "Marital: Married", 3: "Marital: Living with Partner", 4: "Marital: Divorced", 5: "Marital: Separated", 6: "Marital: Widowed"},
-    "D5": {1: "Income: <$25k", 2: "Income: $25k-$50k", 3: "Income: $50k-$75k", 4: "Income: $75k-$100k", 5: "Income: $100k-$150k", 6: "Income: $150k-$200k", 7: "Income: $200k+"},
-    "D7": {1: "Asian Background: Chinese", 2: "Asian Background: Filipino", 3: "Asian Background: Japanese", 4: "Asian Background: Korean", 5: "Asian Background: South Asian", 6: "Asian Background: Southeast Asian", 7: "Asian Background: Other"},
-    "D8": {1: "Immigration: 1st Gen", 2: "Immigration: 1.5 Gen", 3: "Immigration: 2nd Gen", 4: "Immigration: 3rd Gen"},
-    "D9": {1: "Immigration Length: 0-5 years", 2: "Immigration Length: 6-10 years", 3: "Immigration Length: 11-20 years", 4: "Immigration Length: 21+ years"},
-    "D10": {1: "Edu: Bachelor's", 2: "Edu: High School", 3: "Edu: College Diploma", 4: "Edu: Master's", 5: "Edu: Some College", 6: "Edu: Trade School", 7: "Edu: No HS/Some School", 8: "Edu: Doctorate/Professional", 9: "Edu: Attended Trade School"},
-    "D11": {1: "Employ: Full Time", 2: "Employ: Part Time", 3: "Employ: Seeking", 4: "Employ: Student", 5: "Employ: Homemaker", 6: "Employ: Not Seeking", 7: "Employ: Retired"}
+    "D3": {1: "Marital Status: Single", 2: "Marital Status: Married", 3: "Marital Status: Living with Partner", 4: "Marital Status: Divorced", 5: "Marital Status: Separated", 6: "Marital Status: Widowed"},
+    "D5": {1: "Household Income: Under $25,000", 2: "Household Income: $25,000 to $50,000", 3: "Household Income: $50,000 to $75,000", 4: "Household Income: $75,000 to $100,000", 5: "Household Income: $100,000 to $150,000", 6: "Household Income: $150,000 to $200,000", 7: "Household Income: Over $200,000"},
+    "D7": {1: "Asian Background: Chinese", 2: "Asian Background: Filipino", 3: "Asian Background: Japanese", 4: "Asian Background: Korean", 5: "Asian Background: South Asian", 6: "Asian Background: Southeast Asian", 7: "Asian Background: Other Background"},
+    "D8": {1: "Immigration Status: First Generation", 2: "Immigration Status: 1.5 Generation", 3: "Immigration Status: Second Generation", 4: "Immigration Status: Third Generation or more"},
+    "D9": {1: "Years in Canada: 0 to 5 years", 2: "Years in Canada: 6 to 10 years", 3: "Years in Canada: 11 to 20 years", 4: "Years in Canada: 21 or more years"},
+    "D10": {1: "Education: Bachelor's Degree", 2: "Education: High School Diploma", 3: "Education: College Diploma", 4: "Education: Master's Degree", 5: "Education: Some College", 6: "Education: Trade School", 7: "Education: No High School or Some High School", 8: "Education: Doctorate or Professional Degree", 9: "Education: Attended Trade School"},
+    "D11": {1: "Employment: Employed Full-Time", 2: "Employment: Employed Part-Time", 3: "Employment: Seeking Employment", 4: "Employment: Student", 5: "Employment: Homemaker", 6: "Employment: Not Seeking Employment", 7: "Employment: Retired"}
 }
 
 VARIETIES = {
-    1: "Orange Juice", 2: "Lemonade/Limeades", 3: "Juice (NOT orange/lemonade)", 4: "Simply 50 Orange Juice",
-    5: "Orange Juice", 6: "Lemonade/Limeades", 7: "Juice (NOT orange/lemonade)", 8: "Zero Sugar (fruit blends)", 9: "Zero Sugar (lemonades)",
-    10: "Orange Juice", 11: "Lemonade", 12: "Fruit Drinks (NOT orange/lemonade)", 13: "Lower Sugar (orange juice)", 14: "Zero Sugar (fruit blends)", 15: "Zero sugar (lemonades)"
+    1: "Orange Juice", 2: "Lemonade and Limeades", 3: "Fruit Juice and Drink (Not Orange or Lemonade)", 4: "Simply 50 Orange Juice",
+    5: "Orange Juice", 6: "Lemonade and Limeades", 7: "Fruit Juice and Drink (Not Orange or Lemonade)", 8: "Zero Sugar Fruit Blends", 9: "Zero Sugar Lemonades",
+    10: "Orange Juice", 11: "Lemonade", 12: "Fruit Drinks (Not Orange or Lemonade)", 13: "Lower Sugar Orange Juice", 14: "Zero Sugar Fruit Blends", 15: "Zero Sugar Lemonades"
 }
 for i in range(16, 136):
     offset = (i - 16) % 6
     if offset == 0: VARIETIES[i] = "Orange Juice"
-    elif offset == 1: VARIETIES[i] = "Lemonade/Limeades"
-    elif offset == 2: VARIETIES[i] = "Fruit Juice/Drink (NOT orange/lemonade)"
-    elif offset == 3: VARIETIES[i] = "Lower Sugar (orange juice)"
-    elif offset == 4: VARIETIES[i] = "Zero Sugar (fruit blends)"
-    elif offset == 5: VARIETIES[i] = "Zero Sugar (lemonades)"
+    elif offset == 1: VARIETIES[i] = "Lemonade and Limeades"
+    elif offset == 2: VARIETIES[i] = "Fruit Juice and Drink (Not Orange or Lemonade)"
+    elif offset == 3: VARIETIES[i] = "Lower Sugar Orange Juice"
+    elif offset == 4: VARIETIES[i] = "Zero Sugar Fruit Blends"
+    elif offset == 5: VARIETIES[i] = "Zero Sugar Lemonades"
 
 SCALE_OPTIONS = [
     "Exact Match / YES (Binary)",
@@ -199,21 +299,17 @@ SCALE_OPTIONS = [
 # UI HELPERS (OPTIMIZED FOR SPEED)
 # =====================================================================
 def add_to_selection(key_prefix, item):
-    """Callback to append items directly to the multiselect's session state."""
     ms_key = f"{key_prefix}_ms"
     if ms_key in st.session_state:
         if item not in st.session_state[ms_key]:
             st.session_state[ms_key] = st.session_state[ms_key] + [item]
 
 def render_checkbox_search(key_prefix, label, options, default_selection=None):
-    """Renders a dynamic search bar that produces optimized buttons for rapid multi-selection."""
     ms_key = f"{key_prefix}_ms"
-    
     if ms_key not in st.session_state:
         st.session_state[ms_key] = default_selection if default_selection else []
         
     selected = st.multiselect(f"📂 **{label}:**", options, key=ms_key)
-    
     search_query = st.text_input(f"🔍 Search {label} (Click ➕ to add):", key=f"{key_prefix}_search")
     
     if search_query:
@@ -223,10 +319,10 @@ def render_checkbox_search(key_prefix, label, options, default_selection=None):
         
         if matches:
             st.caption(f"Found {len(matches)} matches:")
-            grid_cols = st.columns(2) # Changed to 2 columns for wider text display
+            grid_cols = st.columns(2) 
             for i, match in enumerate(matches[:60]):
                 with grid_cols[i % 2]:
-                    display_text = f"➕ {match}" # Display the full string without truncation
+                    display_text = f"➕ {match}"
                     st.button(
                         display_text,
                         key=f"{key_prefix}_btn_{match}",
@@ -236,34 +332,24 @@ def render_checkbox_search(key_prefix, label, options, default_selection=None):
                     )
         else:
             st.caption("No new matches found.")
-            
     return selected
 
 # =====================================================================
 # MATH & LOGIC HELPERS
 # =====================================================================
 def get_scale_mask(df, var, logic):
-    """Dynamically generates a boolean index mask for processing 1-4 scale survey items."""
     if var not in df.columns:
         return pd.Series(False, index=df.index)
     
     series = df[var]
-    if "Any Agree" in logic:
-        return series.isin([1, 2])
-    elif "Agree Completely" in logic:
-        return series == 1
-    elif "Agree Somewhat" in logic:
-        return series == 2
-    elif "Disagree Somewhat" in logic:
-        return series == 3
-    elif "Disagree Completely" in logic:
-        return series == 4
-    elif "Any Disagree" in logic:
-        return series.isin([3, 4])
-    elif "Exact Match / YES" in logic:
-        return series == 1
-    elif "Does Not Match / NO" in logic:
-        return series == 0
+    if "Any Agree" in logic: return series.isin([1, 2])
+    elif "Agree Completely" in logic: return series == 1
+    elif "Agree Somewhat" in logic: return series == 2
+    elif "Disagree Somewhat" in logic: return series == 3
+    elif "Disagree Completely" in logic: return series == 4
+    elif "Any Disagree" in logic: return series.isin([3, 4])
+    elif "Exact Match / YES" in logic: return series == 1
+    elif "Does Not Match / NO" in logic: return series == 0
     return pd.Series(False, index=df.index)
 
 # =====================================================================
@@ -278,7 +364,6 @@ def load_and_prep_data(file):
     df_valid = pd.DataFrame(index=df.index)
     
     weight_col = next((c for c in df.columns if c.lower() == 'weight'), None)
-    
     if weight_col:
         df_clean['Weight'] = pd.to_numeric(df[weight_col], errors='coerce').fillna(1.0).astype('float32')
         df_valid['Weight'] = df_clean['Weight']
@@ -300,15 +385,11 @@ def load_and_prep_data(file):
         if col in df.columns:
             valid_mask = get_block_valid_mask([col])
             for val, label in value_map.items():
-                if isinstance(val, str):
-                    match_series = (df[col].astype(str).str.strip().str.upper() == val.upper())
-                else:
-                    match_series = (pd.to_numeric(df[col], errors='coerce') == val)
+                if isinstance(val, str): match_series = (df[col].astype(str).str.strip().str.upper() == val.upper())
+                else: match_series = (pd.to_numeric(df[col], errors='coerce') == val)
                 
-                # Combine masks if multiple keys map to the same label (like 2 and 2.0 to 'English')
-                col_name = f"[{col} Demo] {label}"
-                if col_name in df_clean.columns:
-                    df_clean[col_name] = df_clean[col_name] | match_series.astype('int8')
+                col_name = f"[{col} Demographics] {label}"
+                if col_name in df_clean.columns: df_clean[col_name] = df_clean[col_name] | match_series.astype('int8')
                 else:
                     df_clean[col_name] = match_series.astype('int8')
                     df_valid[col_name] = valid_mask.astype('int8')
@@ -316,15 +397,15 @@ def load_and_prep_data(file):
     eth_cols = [f"D6_{i}" for i in ETHNICITIES.keys() if f"D6_{i}" in df.columns]
     eth_mask = get_block_valid_mask(eth_cols) if eth_cols else pd.Series(True, index=df.index)
     for e_idx, e_name in ETHNICITIES.items():
-        if f"D6_{e_idx}" in df.columns: add_var(f"[D6 Demo] Ethnicity: {e_name}", pd.to_numeric(df[f"D6_{e_idx}"], errors='coerce').fillna(0).astype(int), eth_mask)
+        if f"D6_{e_idx}" in df.columns: add_var(f"[D6 Demographics] Ethnicity: {e_name}", pd.to_numeric(df[f"D6_{e_idx}"], errors='coerce').fillna(0).astype(int), eth_mask)
                 
     if 'D2' in df.columns:
         d2_mask = get_block_valid_mask(['D2'])
         d2 = pd.to_numeric(df['D2'], errors='coerce').fillna(0)
-        add_var("[D2 Demo] HH Size: 1 Person", (d2 == 1).astype(int), d2_mask)
-        add_var("[D2 Demo] HH Size: 2 People", (d2 == 2).astype(int), d2_mask)
-        add_var("[D2 Demo] HH Size: 3-4 People", ((d2 >= 3) & (d2 <= 4)).astype(int), d2_mask)
-        add_var("[D2 Demo] HH Size: 5+ People", (d2 >= 5).astype(int), d2_mask)
+        add_var("[D2 Household Composition] 1 Person Household", (d2 == 1).astype(int), d2_mask)
+        add_var("[D2 Household Composition] 2 Person Household", (d2 == 2).astype(int), d2_mask)
+        add_var("[D2 Household Composition] 3 to 4 Person Household", ((d2 >= 3) & (d2 <= 4)).astype(int), d2_mask)
+        add_var("[D2 Household Composition] 5 or More Person Household", (d2 >= 5).astype(int), d2_mask)
 
     d4_cols = [c for c in df.columns if c.startswith('D4_')]
     if d4_cols:
@@ -337,34 +418,34 @@ def load_and_prep_data(file):
             has_u6 = has_u6 | (age_s < 6)
             has_6_12 = has_6_12 | ((age_s >= 6) & (age_s <= 12))
             has_13_17 = has_13_17 | ((age_s >= 13) & (age_s <= 17))
-        add_var("[D4 Demo] Has Child <6", has_u6.astype(int), d4_mask)
-        add_var("[D4 Demo] Has Child 6-12", has_6_12.astype(int), d4_mask)
-        add_var("[D4 Demo] Has Child 13-17", has_13_17.astype(int), d4_mask)
+        add_var("[D4 Household Composition] Has a child under 6 years old", has_u6.astype(int), d4_mask)
+        add_var("[D4 Household Composition] Has a child 6 to 12 years old", has_6_12.astype(int), d4_mask)
+        add_var("[D4 Household Composition] Has a child 13 to 17 years old", has_13_17.astype(int), d4_mask)
 
     for q_code, label in CATEGORIES.items():
-        if q_code in df.columns: add_var(f"[Quota Category] Buyer: {label}", pd.to_numeric(df[q_code], errors='coerce').fillna(0).astype(int), get_block_valid_mask([q_code]))
+        if q_code in df.columns: add_var(f"[Purchaser Category] {label}", pd.to_numeric(df[q_code], errors='coerce').fillna(0).astype(int), get_block_valid_mask([q_code]))
     
     for c_idx, c_name in P3M_CATS.items():
         col = f"S6_r{c_idx}_c1"
-        if col in df.columns: add_var(f"[S6 Category] P3M Self: {c_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
+        if col in df.columns: add_var(f"[S6 Past 3 Month Consumption] {c_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
 
     for b_idx, b_name in BRANDS.items():
-        if f"Q1_{b_idx}" in df.columns: add_var(f"[Q1 Brand] Purchased: {b_name}", pd.to_numeric(df[f"Q1_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q1_{b_idx}"]))
-        if f"Q4_{b_idx}" in df.columns: add_var(f"[Q4 Rejectors/Favs] HH Favorite: {b_name}", pd.to_numeric(df[f"Q4_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q4_{b_idx}"]))
-        if f"Q5_{b_idx}" in df.columns: add_var(f"[Q5 Brand] Most Recent Purch: {b_name}", pd.to_numeric(df[f"Q5_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q5_{b_idx}"]))
-        if f"Q7_{b_idx}" in df.columns: add_var(f"[Q7 Rejectors/Favs] Never Consider: {b_name}", pd.to_numeric(df[f"Q7_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q7_{b_idx}"]))
+        if f"Q1_{b_idx}" in df.columns: add_var(f"[Q1 Brands Purchased] {b_name}", pd.to_numeric(df[f"Q1_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q1_{b_idx}"]))
+        if f"Q4_{b_idx}" in df.columns: add_var(f"[Q4 Household Favorite Brand] {b_name}", pd.to_numeric(df[f"Q4_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q4_{b_idx}"]))
+        if f"Q5_{b_idx}" in df.columns: add_var(f"[Q5 Most Recently Purchased Brand] {b_name}", pd.to_numeric(df[f"Q5_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q5_{b_idx}"]))
+        if f"Q7_{b_idx}" in df.columns: add_var(f"[Q7 Brands Never Considered] {b_name}", pd.to_numeric(df[f"Q7_{b_idx}"], errors='coerce').fillna(0).astype(int), get_block_valid_mask([f"Q7_{b_idx}"]))
 
     for v_idx, v_name in MRI_VALUES.items():
         col = f"Q18_{v_idx}"
-        if col in df.columns: add_var(f"[Q18 Psycho] Core Value: {v_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
+        if col in df.columns: add_var(f"[Q18 Personal Values] {v_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
         
     for r_idx, r_name in KIDS_ATTITUDES.items():
         col = f"Q13_r{r_idx}"
-        if col in df.columns: add_var(f"[Q13 Kids Attitudes] {r_name}", pd.to_numeric(df[col], errors='coerce').fillna(0), get_block_valid_mask([col]))
+        if col in df.columns: add_var(f"[Q13 Attitudes on Kids Beverages] {r_name}", pd.to_numeric(df[col], errors='coerce').fillna(0), get_block_valid_mask([col]))
         
     for idx, name in BEV_ATTITUDES_1.items():
         col = f"Q16_{idx}"
-        if col in df.columns: add_var(f"[Q16 Bev Attitudes] {name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
+        if col in df.columns: add_var(f"[Q16 General Beverage Attitudes] {name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
         
     for idx, name in BEV_ATTITUDES_2.items():
         col = f"Q16x2_{idx}"
@@ -373,10 +454,10 @@ def load_and_prep_data(file):
     for r_idx, r_name in BRAND_ATTITUDES.items():
         for b_idx, b_name in BRANDS.items():
             col = f"Q17_r{r_idx}_c{b_idx}"
-            if col in df.columns: add_var(f"[Q17 Brand Attitude] {r_name} - {b_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
+            if col in df.columns: add_var(f"[Q17 Brand Perceptions] {b_name} - {r_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), get_block_valid_mask([col]))
             
     for q_code, english_stmt in PSYCHOGRAPHICS.items():
-        if q_code in df.columns: add_var(f"[{q_code.split('_')[0]} Psycho] {english_stmt}", pd.to_numeric(df[q_code], errors='coerce').fillna(0), get_block_valid_mask([q_code]))
+        if q_code in df.columns: add_var(f"[{q_code.split('_')[0]} Psychographics] {english_stmt}", pd.to_numeric(df[q_code], errors='coerce').fillna(0), get_block_valid_mask([q_code]))
 
     q8_mask = get_block_valid_mask([c for c in df.columns if c.startswith('Q8_')])
     for col in [c for c in df.columns if c.startswith('Q8_')]:
@@ -386,7 +467,7 @@ def load_and_prep_data(file):
             brand_code = int(parts[1])
             b_name = BRANDS.get(brand_code, "Unknown")
             v_name = VARIETIES.get(variety_code, f"Variety {variety_code}")
-            add_var(f"[Q8 Sub-Brand] {b_name} - {v_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), q8_mask)
+            add_var(f"[Q8 Specific Variety Purchased] {b_name} - {v_name}", pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int), q8_mask)
 
     brand_masks = {}
     for b_idx in BRANDS.keys():
@@ -401,91 +482,91 @@ def load_and_prep_data(file):
 
     for c_idx, c_name in CHANNELS.items():
         for b_idx, b_name in BRANDS.items():
-            if f"Q2_r{c_idx}_c{b_idx}" in df.columns: add_var(f"[Q2 Channel] {c_name} - {b_name}", pd.to_numeric(df[f"Q2_r{c_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
+            if f"Q2_r{c_idx}_c{b_idx}" in df.columns: add_var(f"[Q2 Purchase Channel] {b_name} - {c_name}", pd.to_numeric(df[f"Q2_r{c_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
     for s_idx, s_name in SIZES.items():
         for b_idx, b_name in BRANDS.items():
-            if f"Q3_r{s_idx}_c{b_idx}" in df.columns: add_var(f"[Q3 Size] {s_name} - {b_name}", pd.to_numeric(df[f"Q3_r{s_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
+            if f"Q3_r{s_idx}_c{b_idx}" in df.columns: add_var(f"[Q3 Package Size Purchased] {b_name} - {s_name}", pd.to_numeric(df[f"Q3_r{s_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
     for w_idx, w_name in WHY_CHOOSE.items():
         for b_idx, b_name in BRANDS.items():
-            if f"Q6_{w_idx}.{b_idx}" in df.columns: add_var(f"[Q6 Why Choose] {w_name} - {b_name}", pd.to_numeric(df[f"Q6_{w_idx}.{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
+            if f"Q6_{w_idx}.{b_idx}" in df.columns: add_var(f"[Q6 Reason for Brand Choice] {b_name} - {w_name}", pd.to_numeric(df[f"Q6_{w_idx}.{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
     for w_idx, w_name in WHO_DRINKS.items():
         for b_idx, b_name in BRANDS.items():
-            if f"Q9_r{w_idx}_c{b_idx}" in df.columns: add_var(f"[Q9 Who Drinks] {w_name} - {b_name}", pd.to_numeric(df[f"Q9_r{w_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
+            if f"Q9_r{w_idx}_c{b_idx}" in df.columns: add_var(f"[Q9 Who Consumes the Brand] {b_name} - {w_name}", pd.to_numeric(df[f"Q9_r{w_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
     for a_idx, a_name in OTHER_ADULT_AGES.items():
         for b_idx, b_name in BRANDS.items():
-            if f"Q9aa_{a_idx}.{b_idx}" in df.columns: add_var(f"[Q9aa Who Drinks] Other Adult ({a_name}) - {b_name}", pd.to_numeric(df[f"Q9aa_{a_idx}.{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
+            if f"Q9aa_{a_idx}.{b_idx}" in df.columns: add_var(f"[Q9aa Age of Other Adult Consumer] {b_name} - {a_name}", pd.to_numeric(df[f"Q9aa_{a_idx}.{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
     for w_idx, w_name in WHEN_HOW.items():
         for b_idx, b_name in BRANDS.items():
-            if f"Q9a_r{w_idx}_c{b_idx}" in df.columns: add_var(f"[Q9a When/How] {w_name} - {b_name}", pd.to_numeric(df[f"Q9a_r{w_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
+            if f"Q9a_r{w_idx}_c{b_idx}" in df.columns: add_var(f"[Q9a Occasion and Time of Day] {b_name} - {w_name}", pd.to_numeric(df[f"Q9a_r{w_idx}_c{b_idx}"], errors='coerce').fillna(0).astype(int), brand_masks[b_idx])
     for b_idx, b_name in BRANDS.items():
         if f"Q9b_c{b_idx}" in df.columns:
             s_num = pd.to_numeric(df[f"Q9b_c{b_idx}"], errors='coerce')
-            for f_idx, f_name in FREQUENCY.items(): add_var(f"[Q9b Frequency] {f_name} - {b_name}", (s_num == f_idx).astype(int), brand_masks[b_idx])
+            for f_idx, f_name in FREQUENCY.items(): add_var(f"[Q9b Frequency of Consumption] {b_name} - {f_name}", (s_num == f_idx).astype(int), brand_masks[b_idx])
         if f"Q14_c{b_idx}" in df.columns:
             s_num = pd.to_numeric(df[f"Q14_c{b_idx}"], errors='coerce')
-            for r_idx, r_name in REASONS.items(): add_var(f"[Q14 Reason] {r_name} - {b_name}", (s_num == r_idx).astype(int), brand_masks[b_idx])
+            for r_idx, r_name in REASONS.items(): add_var(f"[Q14 Primary Need State or Reason] {b_name} - {r_name}", (s_num == r_idx).astype(int), brand_masks[b_idx])
 
     for c_idx, c_name in CHANNELS.items():
         cols = [f"Q2_r{c_idx}_c{b_idx}" for b_idx in BRANDS.keys() if f"Q2_r{c_idx}_c{b_idx}" in df.columns]
-        if cols: add_var(f"[Q2 Channel] AGGREGATE: {c_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
+        if cols: add_var(f"[Q2 Purchase Channel] Overall: {c_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
         
     for s_idx, s_name in SIZES.items():
         cols = [f"Q3_r{s_idx}_c{b_idx}" for b_idx in BRANDS.keys() if f"Q3_r{s_idx}_c{b_idx}" in df.columns]
-        if cols: add_var(f"[Q3 Size] AGGREGATE: {s_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
+        if cols: add_var(f"[Q3 Package Size Purchased] Overall: {s_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
         
     for w_idx, w_name in WHY_CHOOSE.items():
         cols = [f"Q6_{w_idx}.{b_idx}" for b_idx in BRANDS.keys() if f"Q6_{w_idx}.{b_idx}" in df.columns]
-        if cols: add_var(f"[Q6 Why Choose] AGGREGATE: {w_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
+        if cols: add_var(f"[Q6 Reason for Brand Choice] Overall: {w_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
         
     for w_idx, w_name in WHO_DRINKS.items():
         cols = [f"Q9_r{w_idx}_c{b_idx}" for b_idx in BRANDS.keys() if f"Q9_r{w_idx}_c{b_idx}" in df.columns]
-        if cols: add_var(f"[Q9 Who Drinks] AGGREGATE: {w_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
+        if cols: add_var(f"[Q9 Who Consumes the Brand] Overall: {w_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
         
     for w_idx, w_name in WHEN_HOW.items():
         cols = [f"Q9a_r{w_idx}_c{b_idx}" for b_idx in BRANDS.keys() if f"Q9a_r{w_idx}_c{b_idx}" in df.columns]
-        if cols: add_var(f"[Q9a When/How] AGGREGATE: {w_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
+        if cols: add_var(f"[Q9a Occasion and Time of Day] Overall: {w_name}", (df[cols].apply(pd.to_numeric, errors='coerce').fillna(0) > 0).any(axis=1).astype(int), get_block_valid_mask(cols))
         
     for f_idx, f_name in FREQUENCY.items():
         cols = [f"Q9b_c{b_idx}" for b_idx in BRANDS.keys() if f"Q9b_c{b_idx}" in df.columns]
         if cols:
             agg_mask = pd.Series(False, index=df.index)
             for c in cols: agg_mask = agg_mask | (pd.to_numeric(df[c], errors='coerce') == f_idx)
-            add_var(f"[Q9b Frequency] AGGREGATE: {f_name}", agg_mask.astype(int), get_block_valid_mask(cols))
+            add_var(f"[Q9b Frequency of Consumption] Overall: {f_name}", agg_mask.astype(int), get_block_valid_mask(cols))
             
     for r_idx, r_name in REASONS.items():
         cols = [f"Q14_c{b_idx}" for b_idx in BRANDS.keys() if f"Q14_c{b_idx}" in df.columns]
         if cols:
             agg_mask = pd.Series(False, index=df.index)
             for c in cols: agg_mask = agg_mask | (pd.to_numeric(df[c], errors='coerce') == r_idx)
-            add_var(f"[Q14 Reason] AGGREGATE: {r_name}", agg_mask.astype(int), get_block_valid_mask(cols))
+            add_var(f"[Q14 Primary Need State or Reason] Overall: {r_name}", agg_mask.astype(int), get_block_valid_mask(cols))
 
     q5a_mask = get_block_valid_mask([c for c in df.columns if c.startswith('Q5a')])
     if q5a_mask.any():
         cols = [c for c in df.columns if c.startswith('Q5a')]
         s_num = pd.to_numeric(df[cols[0]], errors='coerce')
-        for r_idx, r_name in RECENT_PURCHASE.items(): add_var(f"[Q5a Buying Styles] Recent Purch: {r_name}", (s_num == r_idx).astype(int), q5a_mask)
+        for r_idx, r_name in RECENT_PURCHASE.items(): add_var(f"[Q5a Time Since Last Purchase] {r_name}", (s_num == r_idx).astype(int), q5a_mask)
             
     q15_mask = get_block_valid_mask(['Q15'])
     if 'Q15' in df.columns:
         s_num = pd.to_numeric(df['Q15'], errors='coerce')
-        for r_idx, r_name in CONSUMPTION_CHANGE.items(): add_var(f"[Q15 Buying Styles] Consumption: {r_name}", (s_num == r_idx).astype(int), q15_mask)
+        for r_idx, r_name in CONSUMPTION_CHANGE.items(): add_var(f"[Q15 Change in Consumption vs Last Year] {r_name}", (s_num == r_idx).astype(int), q15_mask)
             
-    q_map = {'Q10': 'OJ', 'Q11': 'Lemonade', 'Q12': 'Other Juice'}
+    q_map = {'Q10': 'Orange Juice', 'Q11': 'Lemonade', 'Q12': 'Other Juice'}
     for q_code, q_label in q_map.items():
         if q_code in df.columns:
             q_mask = get_block_valid_mask([q_code])
             s_num = pd.to_numeric(df[q_code], errors='coerce')
-            for l_idx, l_name in LOYALTY_APPROACH.items(): add_var(f"[{q_code} Buying Styles] Approach to {q_label}: {l_name}", (s_num == l_idx).astype(int), q_mask)
+            for l_idx, l_name in LOYALTY_APPROACH.items(): add_var(f"[{q_code} Brand Loyalty and Approach] {q_label}: {l_name}", (s_num == l_idx).astype(int), q_mask)
         
         qa_cols = [c for c in df.columns if c.startswith(f"{q_code}a_")]
         qa_mask = get_block_valid_mask(qa_cols)
         for p_idx, p_name in ADULT_PURCHASE_DRIVERS.items():
-            if f"{q_code}a_{p_idx}" in df.columns: add_var(f"[{q_code}a Buying Styles] Adult Driver ({q_label}): {p_name}", pd.to_numeric(df[f"{q_code}a_{p_idx}"], errors='coerce').fillna(0).astype(int), qa_mask)
+            if f"{q_code}a_{p_idx}" in df.columns: add_var(f"[{q_code}a Purchase Drivers for Adults] {q_label}: {p_name}", pd.to_numeric(df[f"{q_code}a_{p_idx}"], errors='coerce').fillna(0).astype(int), qa_mask)
         
         qb_cols = [c for c in df.columns if c.startswith(f"{q_code}b_")]
         qb_mask = get_block_valid_mask(qb_cols)
         for p_idx, p_name in KIDS_PURCHASE_DRIVERS.items():
-            if f"{q_code}b_{p_idx}" in df.columns: add_var(f"[{q_code}b Buying Styles] Kids Driver ({q_label}): {p_name}", pd.to_numeric(df[f"{q_code}b_{p_idx}"], errors='coerce').fillna(0).astype(int), qb_mask)
+            if f"{q_code}b_{p_idx}" in df.columns: add_var(f"[{q_code}b Purchase Drivers for Kids] {q_label}: {p_name}", pd.to_numeric(df[f"{q_code}b_{p_idx}"], errors='coerce').fillna(0).astype(int), qb_mask)
 
         qc_col = f"{q_code}c"
         if qc_col in df.columns:
@@ -493,13 +574,13 @@ def load_and_prep_data(file):
             s_num = pd.to_numeric(df[qc_col], errors='coerce')
             for c_idx, c_name in LAST_TIME_INFLUENCE.items():
                 if c_idx != 4:
-                    add_var(f"[{qc_col} Buying Styles] Last Time Influence ({q_label}): {c_name}", (s_num == c_idx).astype(int), qc_mask)
+                    add_var(f"[{qc_col} Primary Influence for Last Purchase] {q_label}: {c_name}", (s_num == c_idx).astype(int), qc_mask)
 
     if 'Q10d' in df.columns:
         qd_mask = get_block_valid_mask(['Q10d'])
         s_num = pd.to_numeric(df['Q10d'], errors='coerce')
         for d_idx, d_name in LAST_TIME_INFLUENCE.items():
-            add_var(f"[Q10d Buying Styles] Last Time Value (OJ): {d_name}", (s_num == d_idx).astype(int), qd_mask)
+            add_var(f"[Q10d Primary Influence for Last Purchase] Orange Juice: {d_name}", (s_num == d_idx).astype(int), qd_mask)
 
     known_prefixes = ('S1', 'S2', 'S3', 'S4', 'S6', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11',
                       'Q1_', 'Q2_', 'Q3_', 'Q4_', 'Q5_', 'Q5a', 'Q6_', 'Q7_', 'Q8_', 'Q9_', 'Q9a_', 'Q9aa_', 'Q9b_',
@@ -513,7 +594,7 @@ def load_and_prep_data(file):
         if len(unique_vals) > 1 and len(unique_vals) <= 15:
             valid_mask = get_block_valid_mask([c])
             for val in unique_vals:
-                if str(val).strip() != '': add_var(f"[{c} Raw] Answer: {val}", (df[c] == val).astype(int), valid_mask)
+                if str(val).strip() != '': add_var(f"[{c} Raw Question Data] Answer: {val}", (df[c] == val).astype(int), valid_mask)
 
     return df_clean, df_valid
 
@@ -550,7 +631,7 @@ if uploaded_file:
             
             is_legacy_state = False
             if 'df_working' in st.session_state:
-                if not any('[Q19 Psycho]' in c for c in st.session_state['df_working'].columns):
+                if not any('Psychographics]' in c for c in st.session_state['df_working'].columns):
                     is_legacy_state = True
             
             if 'data_loaded' not in st.session_state or st.session_state.get('file_name') != uploaded_file.name or is_legacy_state:
@@ -568,17 +649,17 @@ if uploaded_file:
     CAT_CHANNELS, CAT_REASONS, CAT_ATTITUDES, CAT_PERCEPTIONS, CAT_RAW, CAT_AGGREGATES = [], [], [], [], [], []
     
     for c in all_cols:
-        if "AGGREGATE:" in c: CAT_AGGREGATES.append(c)
-        elif "Demo]" in c: CAT_DEMOS.append(c)
-        elif "Category]" in c: CAT_CATEGORIES.append(c)
-        elif "Brand]" in c or "Size]" in c or "Sub-Brand]" in c: CAT_BRANDS.append(c)
-        elif "Buying Styles]" in c: CAT_BUYING.append(c)
-        elif "Rejectors/Favs]" in c: CAT_FAVS.append(c)
-        elif "Channel]" in c or "When/How]" in c or "Frequency]" in c or "Who Drinks]" in c: CAT_CHANNELS.append(c)
-        elif "Why Choose]" in c or "Reason]" in c: CAT_REASONS.append(c)
-        elif "Psycho]" in c or "Kids Attitudes]" in c or "Bev Attitudes]" in c: CAT_ATTITUDES.append(c)
-        elif "Brand Attitude]" in c: CAT_PERCEPTIONS.append(c)
-        elif "Raw]" in c: CAT_RAW.append(c)
+        if "Overall:" in c: CAT_AGGREGATES.append(c)
+        elif "Demographics]" in c or "Household Composition]" in c: CAT_DEMOS.append(c)
+        elif "Purchaser Category]" in c or "Past 3 Month" in c: CAT_CATEGORIES.append(c)
+        elif "Brands Purchased]" in c or "Package Size" in c or "Specific Variety" in c: CAT_BRANDS.append(c)
+        elif "Purchase Drivers" in c or "Time Since" in c or "Brand Loyalty" in c or "Primary Influence" in c or "Change in Consumption" in c: CAT_BUYING.append(c)
+        elif "Favorite Brand]" in c or "Never Considered]" in c or "Most Recently" in c: CAT_FAVS.append(c)
+        elif "Purchase Channel]" in c or "Occasion and" in c or "Frequency" in c or "Who Consumes" in c or "Age of Other" in c: CAT_CHANNELS.append(c)
+        elif "Reason for Brand" in c or "Primary Need State" in c: CAT_REASONS.append(c)
+        elif "Psychographics]" in c or "Attitudes on Kids" in c or "General Beverage Attitudes" in c or "Personal Values]" in c: CAT_ATTITUDES.append(c)
+        elif "Brand Perceptions]" in c: CAT_PERCEPTIONS.append(c)
+        elif "Raw Question Data]" in c: CAT_RAW.append(c)
     
     if st.session_state['created_definitions']:
         st.sidebar.markdown("---")
@@ -651,7 +732,7 @@ if uploaded_file:
                 target_col = col_logic1 if i % 2 == 0 else col_logic2
                 with target_col:
                     role_label = "(Threshold Pool)" if stmt in threshold_statements else "(Mandatory Rule)"
-                    is_scale = (("Psycho]" in stmt) and ("Core Value" not in stmt)) or ("Kids Attitudes]" in stmt)
+                    is_scale = "Psychographics]" in stmt or "Attitudes on Kids Beverages]" in stmt
                     if is_scale: statement_logic[stmt] = st.selectbox(f"Match requirement for: {stmt} {role_label}", options=SCALE_OPTIONS[2:], index=0, key=f"logic_{stmt}")
                     else:
                         st.info(f"✔️ **{stmt}** (Auto-Matched as YES/NO)")
@@ -753,7 +834,7 @@ if uploaded_file:
                         else: qc_valid_base = pd.Series(False, index=st.session_state['df_working'].index)
                         
                         for v in qc_vars:
-                            is_scale = (("Psycho]" in v) and ("Core Value" not in v)) or ("Kids Attitudes]" in v)
+                            is_scale = "Psychographics]" in v or "Attitudes on Kids Beverages]" in v
                             v_mask = st.session_state['df_working'][v].isin([1, 2]) if is_scale else st.session_state['df_working'][v] == 1
                             if "AND" in qc_logic:
                                 qc_mask = qc_mask & v_mask
@@ -801,11 +882,9 @@ if uploaded_file:
             base_cols = list(dict.fromkeys([x for x in base_cols if x]))
 
             if base_cols:
-                # 1. Identify if any selected base variables are 1-4 scale psychographics
-                scale_vars_in_base = [v for v in base_cols if (("Psycho]" in v) and ("Core Value" not in v)) or ("Kids Attitudes]" in v)]
+                scale_vars_in_base = [v for v in base_cols if "Psychographics]" in v or "Attitudes on Kids Beverages]" in v]
                 base_logic_dict = {}
                 
-                # 2. If scales are present, render dropdowns so the user can choose "Any Agree" vs "Any Disagree"
                 if scale_vars_in_base:
                     st.markdown("##### ⚙️ Fine-Tune Base Attitude Scales")
                     b_logic1, b_logic2 = st.columns(2)
@@ -814,10 +893,8 @@ if uploaded_file:
                         with t_col:
                             base_logic_dict[v] = st.selectbox(f"Match requirement for: {v}", options=SCALE_OPTIONS[2:], index=0, key=f"base_logic_{v}")
                 
-                # 3. Ask if they want to intersect (AND) or combine (OR) these base rules
                 base_combine_logic = st.radio("How should we combine these Base filters?", ["OR (Must meet ANY)", "AND (Must meet ALL)"], horizontal=True)
                 
-                # 4. Process each variable individually using robust masking rules
                 base_mask_list = []
                 for c in base_cols:
                     if c in scale_vars_in_base:
@@ -826,13 +903,9 @@ if uploaded_file:
                     else:
                         base_mask_list.append(st.session_state['df_working'][c] == 1)
                 
-                # 5. Combine the masks based on user choice
-                if "AND" in base_combine_logic:
-                    person_mask = pd.concat(base_mask_list, axis=1).all(axis=1)
-                else:
-                    person_mask = pd.concat(base_mask_list, axis=1).any(axis=1)
+                if "AND" in base_combine_logic: person_mask = pd.concat(base_mask_list, axis=1).all(axis=1)
+                else: person_mask = pd.concat(base_mask_list, axis=1).any(axis=1)
                 
-                # 6. Calculate the dynamic sizing
                 unweighted_people = person_mask.sum()
                 weighted_people = st.session_state['df_working'].loc[person_mask, 'Weight'].sum()
                 
@@ -898,7 +971,7 @@ if uploaded_file:
         if ct_rows and (ct_cols_for_ui or st.session_state['created_definitions']):
             st.markdown("---")
             
-            scale_vars_in_ct = [v for v in set(ct_rows + ct_cols_for_ui) if (("Psycho]" in v) and ("Core Value" not in v)) or ("Kids Attitudes]" in v)]
+            scale_vars_in_ct = [v for v in set(ct_rows + ct_cols_for_ui) if "Psychographics]" in v or "Attitudes on Kids Beverages]" in v]
             ct_logic_dict = {}
             if scale_vars_in_ct:
                 with st.expander("⚙️ Fine-Tune Attitude Scales for Rows & Columns (Defaults to Any Agree)", expanded=False):
@@ -931,7 +1004,7 @@ if uploaded_file:
                     col_masks = {}
                     
                     for c in ct_cols:
-                        is_scale = (("Psycho]" in c) and ("Core Value" not in c)) or ("Kids Attitudes]" in c)
+                        is_scale = "Psychographics]" in c or "Attitudes on Kids Beverages]" in c
                         if c == base_col_name:
                             mask = df_ct_work[c] == 1
                             c_label = c
@@ -953,7 +1026,7 @@ if uploaded_file:
                     
                     for r in ct_rows:
                         if r == base_col_name: continue
-                        is_scale = (("Psycho]" in r) and ("Core Value" not in r)) or ("Kids Attitudes]" in r)
+                        is_scale = "Psychographics]" in r or "Attitudes on Kids Beverages]" in r
                         if is_scale:
                             logic = ct_logic_dict.get(r, "Any Agree (1 or 2 combined)")
                             r_mask = get_scale_mask(df_ct_work, r, logic)
